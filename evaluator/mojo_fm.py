@@ -6,7 +6,6 @@ def get_mojo(file_path1, file_path2):
 	cmd = "java -jar ./evaluator/mojo.jar  " + file_path1 + "  " + file_path2+" -fm"
 	p = Popen(cmd, shell=True, stdout=PIPE, stderr=PIPE)
 	out, err = p.communicate()
-	print(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 	results = out.strip()
 	return results
 

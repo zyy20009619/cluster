@@ -60,6 +60,8 @@ def main():
 
     if result_path == '':
         result_path = '..//' + project_name + '-out'
+    else:
+        result_path += project_name + '-out'
     os.makedirs(result_path, exist_ok=True)
 
     # 根据选择功能进行gt收集/聚类/评估
