@@ -10,7 +10,7 @@ def extensionMain(project_name, project_path, file_path, lang, algo, granularity
         os.system('java -jar ./algos/tools/acdc.jar ' + depends_path + ' ' + base_out_path + '/' + project_name + '-acdc-out.rsf')
         _gen_json(base_out_path + '/' + project_name + '-acdc-out.rsf', base_out_path + '/' + project_name + '-acdc-out.json')
     elif algo == 'bunch':
-        # TODO:没有任何显示
+        # TODO:没有任何显示(没有使用说明)
         os.system('java -jar bunch.jar ' + depends_path + ' ' + base_out_path + '/' + project_name + '-bunch-out.rsf')
     else:
         # TODO:报越界错误(推测原因：仅支持c/c++/java)

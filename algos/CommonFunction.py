@@ -315,17 +315,17 @@ def makeGraph(variables, cells, useList, dictFileLabel, swName):
         dict1[variableFile].append(variableNum)
 
     graph = []
-    important = ['Call', 'Parameter', 'Inherit', 'Call non-dynamic', 'Implement']
-    for cellNum in range(len(cells)):
-        src = cells[cellNum]['src']
-        dest = cells[cellNum]['dest']
-        valueKeyTemp = list(cells[cellNum]['values'].keys())
-        if 'kind' in cells[cellNum]['values']:
-            valueKeyTemp = cells[cellNum]['values']['kind']
-        valueKey = valueKeyTemp[0]
-        weight = 1
-        if valueKey in important:
-            weight = 2
+    # important = ['Call', 'Parameter', 'Inherit', 'Call non-dynamic', 'Implement']
+    for c_src in cells:
+        src = c_src
+        dest = cells[src]
+        # valueKeyTemp = list(cells[cellNum]['values'].keys())
+        # if 'kind' in cells[cellNum]['values']:
+        #     valueKeyTemp = cells[cellNum]['values']['kind']
+        # valueKey = valueKeyTemp[0]
+        weight = 2
+        # if valueKey in important:
+        #     weight = 2
         if src not in useList or dest not in useList:
             continue
         srcKey = judgeWhichKey(dict1, src)
@@ -501,7 +501,7 @@ def mainMethod(SoftwareName, jsonFileName, AssociationNetworkName, GraphEmbeddin
     dictFileLabel = generateFileLabel(variables=variable_name, swName=SoftwareName)
 
     graphManual = makeGraph(variables=variable_name,
-                            cells=cells_construct,
+                            cells=result_cells,
                             useList=useList,
                             dictFileLabel=dictFileLabel,
                             swName=SoftwareName)

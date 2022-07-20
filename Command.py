@@ -10,18 +10,18 @@ def main():
     parser = argparse.ArgumentParser(description="Reverse Engineering")
     parser.add_argument('--option', default='cluster')  # 选择当前使用命令行功能：gt/cluster/evaluator
     parser.add_argument('--projectname', default='numpy')  #与deppath保持一致
-    parser.add_argument('--deppath', default=r'D:\research\paperdocs\zyy\架构逆向\cluster(1)\cluster\test_data\input\type\numpy\numpy-report-enre.json')
+    parser.add_argument('--deppath', default=r'C:\Users\20463\Desktop\numpy-test\numpy-test\json_input\json_notype\numpy-report-enre-notype.json')
     parser.add_argument('--resultpath', default='')
     # gt/cluster需要对分粒度进行依赖关系提取:module/class/method
     parser.add_argument('--granularity', default='method')
     # cluster：ACDC/Bunch/WCA/LIMBO/ARC/AGK/SKM/DBSCAN/SpectralClustering等
-    parser.add_argument('--algo', default='bunch')
+    parser.add_argument('--algo', default='SKM')
     # cluster：AGK/SKM/DBSCAN/SpectralClustering等聚类算法输入参数
     parser.add_argument('--AssociationNetworkName', default='Construct')
     parser.add_argument('--GraphEmbeddingAlgorithm', default='Struc2Vec')
     parser.add_argument('--num', default=6)
     # cluster：WCA/LIMBO/ARC聚类算法需输入项目路径和开发语言
-    parser.add_argument('--projectpath', default=r'D:\research\testdata\testproject\numpy')
+    parser.add_argument('--projectpath', default='')
     parser.add_argument('--lang', default='python')
     # evaluator：使用mojoFM指标评估聚类结果和真实架构的相似度，需要输入gt和聚类结果
     parser.add_argument('--gt', default='../backend-out/backend-gt-out.rsf')
