@@ -8,7 +8,7 @@ from evaluator.mojo_fm import get_mojo_fm
 
 def main():
     parser = argparse.ArgumentParser(description="Reverse Engineering")
-    parser.add_argument('--option', default='cluster')  # 选择当前使用命令行功能：gt/cluster/evaluator
+    parser.add_argument('--option', default='evaluator')  # 选择当前使用命令行功能：gt/cluster/evaluator
     parser.add_argument('--projectname', default='numpy')  #与deppath保持一致
     parser.add_argument('--deppath', default=r'C:\Users\20463\Desktop\numpy-test\numpy-test\json_input\json_notype\numpy-report-enre-notype.json')
     parser.add_argument('--resultpath', default='')
@@ -24,8 +24,8 @@ def main():
     parser.add_argument('--projectpath', default='')
     parser.add_argument('--lang', default='python')
     # evaluator：使用mojoFM指标评估聚类结果和真实架构的相似度，需要输入gt和聚类结果
-    parser.add_argument('--gt', default='../backend-out/backend-gt-out.rsf')
-    parser.add_argument('--cluster', default='../backend-out/backend-acdc-out.rsf')
+    parser.add_argument('--gt', default='../numpy-out/numpy-gt-out.rsf')
+    parser.add_argument('--cluster', default='../numpy-out/numpy-AGK-out.rsf')
 
     args = parser.parse_args()
     project_name = args.projectname
