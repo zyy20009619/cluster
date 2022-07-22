@@ -8,39 +8,39 @@ from evaluator.mojo_fm import get_mojo_fm
 
 def main():
     parser = argparse.ArgumentParser(description="Reverse Engineering")
-    parser.add_argument('--option', default='evaluator')  # 选择当前使用命令行功能：gt/cluster/evaluator
-    parser.add_argument('--projectname', default='numpy')  #与deppath保持一致
-    parser.add_argument('--deppath', default=r'C:\Users\20463\Desktop\numpy-test\numpy-test\json_input\json_notype\numpy-report-enre-notype.json')
-    parser.add_argument('--resultpath', default='')
+    parser.add_argument('--opt', help='function options(gt/cluster/evaluator)', default='')  # 选择当前使用命令行功能：gt/cluster/evaluator
+    parser.add_argument('--pro', help='project name', default='')  #与deppath保持一致
+    parser.add_argument('--dep', help='project dep file path', default='')
+    parser.add_argument('--res', help='result path', default='')
     # gt/cluster需要对分粒度进行依赖关系提取:module/class/method
-    parser.add_argument('--granularity', default='method')
+    parser.add_argument('--g', help='granularity for gt or cluster', default='')
     # cluster：ACDC/Bunch/WCA/LIMBO/ARC/AGK/SKM/DBSCAN/SpectralClustering等
-    parser.add_argument('--algo', default='SKM')
+    parser.add_argument('--algo', help='clustering algorithm(ACDC/Bunch/WCA/LIMBO/ARC/AGK/SKM/DBSCAN/SpectralClustering)', default='ACDC')
     # cluster：AGK/SKM/DBSCAN/SpectralClustering等聚类算法输入参数
-    parser.add_argument('--AssociationNetworkName', default='Construct')
-    parser.add_argument('--GraphEmbeddingAlgorithm', default='Struc2Vec')
-    parser.add_argument('--num', default=6)
+    # parser.add_argument('--an', help='association network name()', default='Construct')
+    parser.add_argument('--ge', help='graph embedding algorithm(Struc2Vec/DeepWalk/Node2Vec)', default='Struc2Vec')
+    parser.add_argument('--num', help='cluster number', default=6)
     # cluster：WCA/LIMBO/ARC聚类算法需输入项目路径和开发语言
-    parser.add_argument('--projectpath', default='')
-    parser.add_argument('--lang', default='python')
+    parser.add_argument('--propath', help='project path', default='')
+    parser.add_argument('--lang', help='language', default='')
     # evaluator：使用mojoFM指标评估聚类结果和真实架构的相似度，需要输入gt和聚类结果
-    parser.add_argument('--gt', default='../numpy-out/numpy-gt-out.rsf')
-    parser.add_argument('--cluster', default='../numpy-out/numpy-AGK-out.rsf')
+    parser.add_argument('--gt', help='ground truth file path', default='')
+    parser.add_argument('--cluster', help='result of cluster file path', default='')
 
     args = parser.parse_args()
-    project_name = args.projectname
-    option = args.option
-    dep_path = args.deppath
-    result_path = args.resultpath
+    project_name = args.pro
+    option = args.opt
+    dep_path = args.dep
+    result_path = args.res
     AssociationNetworkName = 'Construct'
-    GraphEmbeddingAlgorithm = 'Node2Vec'
+    GraphEmbeddingAlgorithm = args.ge
     algo = args.algo
     ClusterNum = args.num
-    project_path = args.projectpath
+    project_path = args.propath
     lang = args.lang
     gt = args.gt
     cluster = args.cluster
-    granularity = args.granularity
+    granularity = args.g
 
     # 参数校验
     if option == '':
@@ -60,8 +60,6 @@ def main():
 
     if result_path == '':
         result_path = '..//' + project_name + '-out'
-    else:
-        result_path += project_name + '-out'
     os.makedirs(result_path, exist_ok=True)
 
     # 根据选择功能进行gt收集/聚类/评估
